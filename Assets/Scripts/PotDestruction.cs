@@ -6,6 +6,7 @@ public class PotDestruction : MonoBehaviour
 {
     private Animator myAnimator;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +21,11 @@ public class PotDestruction : MonoBehaviour
 
     public void Smash(){
         myAnimator.SetBool("smash",true);
+        StartCoroutine(breakCo());
+    }
+
+    IEnumerator breakCo(){
+        yield return new WaitForSeconds(.3f);
+        this.gameObject.SetActive(false);
     }
 }

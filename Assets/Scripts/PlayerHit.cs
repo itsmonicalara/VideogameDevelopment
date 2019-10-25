@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerHit : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,11 @@ public class PlayerHit : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D col){
+        if(col.CompareTag("breakable")){
+            col.GetComponent<PotDestruction>().Smash();
+        }
     }
 }

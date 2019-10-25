@@ -26,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetButtonDown("attack")){
             StartCoroutine(AttackCo());
         }
+        if(Input.GetKeyDown(KeyCode.Z)){
+            StartCoroutine(AttackSword());
+        }
         ShootArrows();
         UpdateAnimation();   
     }
@@ -34,6 +37,12 @@ public class PlayerMovement : MonoBehaviour
         myAnimator.SetBool("attacking",true);
         yield return null;
         myAnimator.SetBool("attacking",false);
+        yield return new WaitForSeconds(.3f);
+    }
+    private IEnumerator AttackSword(){
+        myAnimator.SetBool("sword",true);
+        yield return null;
+        myAnimator.SetBool("sword",false);
         yield return new WaitForSeconds(.3f);
     }
 

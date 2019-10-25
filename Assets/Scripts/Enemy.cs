@@ -20,4 +20,19 @@ public class Enemy : MonoBehaviour
     {
         
     }
+
+    void isDead(){
+        if(health == 0){
+            Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col){
+        name = gameObject.name;
+        if(name == "Arrow(Clone)"){
+            Destroy(col.gameObject);
+            Destroy(gameObject);
+        }
+
+    }
 }
