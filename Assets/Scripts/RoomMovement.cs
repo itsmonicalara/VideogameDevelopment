@@ -12,7 +12,6 @@ public class RoomMovement : MonoBehaviour
     public string placeName;
     public GameObject text;
     public Text placeText;
-    private float fadeOutTime = 4f;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,12 +38,8 @@ public class RoomMovement : MonoBehaviour
     private IEnumerator PlaceNameCo(){
         text.SetActive(true);
         placeText.text = placeName;
-        Color originalColor = placeText.color;
-        for (float t = 0.01f; t < fadeOutTime; t += Time.deltaTime)
-             {
-                 placeText.color = Color.Lerp(originalColor, Color.clear, Mathf.Min(1, t/fadeOutTime));
-                 yield return null;
-             }
+        yield return new WaitForSeconds(4f);
         text.SetActive(false);
     }
+
 }
