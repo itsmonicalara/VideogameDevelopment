@@ -29,11 +29,13 @@ public class BattleSystem : MonoBehaviour
     public AudioSource battleEnds;
     public AudioSource enemySound;
 
+	
+
     // Start is called before the first frame update
     void Start()
     {
 		state = BattleState.START;
-		StartCoroutine(SetupBattle());
+		StartCoroutine(SetupBattle());		
     }
 
 	IEnumerator SetupBattle()
@@ -157,5 +159,7 @@ public class BattleSystem : MonoBehaviour
 
 		StartCoroutine(PlayerHeal());
 	}
+
+	
 
 }
