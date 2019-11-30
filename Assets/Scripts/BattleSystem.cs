@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
@@ -29,7 +30,10 @@ public class BattleSystem : MonoBehaviour
     public AudioSource battleEnds;
     public AudioSource enemySound;
 
-	
+    private bool dirRight = false;
+    public float speed = 2.0f;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +42,8 @@ public class BattleSystem : MonoBehaviour
 		StartCoroutine(SetupBattle());		
     }
 
-	IEnumerator SetupBattle()
+
+    IEnumerator SetupBattle()
 	{
 		GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
 		playerUnit = playerGO.GetComponent<Unit>();
@@ -116,6 +121,9 @@ public class BattleSystem : MonoBehaviour
 		{
 			dialogueText.text = "Te han derrotado Manuelito :(";
 		}
+
+		
+		SceneManager.LoadScene("Menu");
 	}
 
 	void PlayerTurn()
@@ -160,6 +168,24 @@ public class BattleSystem : MonoBehaviour
 		StartCoroutine(PlayerHeal());
 	}
 
-	
+    void AnimPlayer()
+    {
+        if (dirRight)
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+        else
+            transform.Translate(-Vector2.right * speed * Time.deltaTime);
+
+        if (transform.position.x >= 4.0f)
+        {
+            dirRight = false;
+        }
+
+        if (transform.position.x <= -4)
+        {
+            dirRight = true;
+        }
+    }
+
+
 
 }

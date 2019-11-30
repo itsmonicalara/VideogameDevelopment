@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 myChange;
     private Animator myAnimator;
     public GameObject arrowPrefab;
+    public int heroHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         }
         ShootArrows();
         UpdateAnimation();   
+        Debug.Log("The hero health is: " + heroHealth);
     }
 
     private IEnumerator AttackCo(){
@@ -69,6 +72,21 @@ public class PlayerMovement : MonoBehaviour
             arrow.GetComponent<Rigidbody2D>().velocity = shootingDirection * 5.0f;
             arrow.transform.Rotate(0.0f, 0.0f, Mathf.Atan2(shootingDirection.y,shootingDirection.x)*Mathf.Rad2Deg);
             Destroy(arrow,2.0f);
+        }
+    }
+
+    private void OnTriggerEnter2D (Collider2D other) {
+        // Debug.Log("Collision con el arbol");
+        Debug.Log("The hero Health is: " + heroHealth);
+
+        if(other.gameObject.tag == "enemy") {
+        heroHealth = heroHealth - 10;
+            if(heroHealth == 0) {
+                // Destroy(gameObject);
+                SceneManager.LoadScene("GameOver");
+
+                Debug.Log("GAME OVER");
+            }
         }
     }
 

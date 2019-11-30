@@ -1397,6 +1397,7 @@ MonoBehaviour:
   battleBegins: {fileID: 675451593}
   battleEnds: {fileID: 1495769990}
   enemySound: {fileID: 1497721257}
+  speed: 2
 --- !u!4 &756095545
 Transform:
   m_ObjectHideFlags: 0
